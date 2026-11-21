@@ -52,6 +52,16 @@ export default function Contact() {
   const [errors, setErrors] = useState({});
   const [feedback, setFeedback] = useState(null);
   const [preparedMailto, setPreparedMailto] = useState('');
+  const whatsappMessage =
+    'Hello Akash, I visited your portfolio and would like to connect with you.';
+  const emailMessage =
+    'Hello Akash, I visited your portfolio and would like to connect with you.';
+  const whatsappUrl = siteContact.whatsappNumber
+    ? `https://wa.me/${siteContact.whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
+    : '';
+  const emailUrl = siteContact.email
+    ? `mailto:${siteContact.email}?subject=${encodeURIComponent('Contact from Portfolio Website')}&body=${encodeURIComponent(emailMessage)}`
+    : '';
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -124,10 +134,43 @@ export default function Contact() {
               Choose a direct link, or use the form to prepare an email.
             </p>
 
-            <a className="contact__email" href={`mailto:${siteContact.email}`}>
-              <span className="contact__detail-label">EMAIL</span>
-              <span>{siteContact.email}</span>
-            </a>
+            <div className="contact__actions" aria-label="Direct contact options">
+              {whatsappUrl && (
+                <a
+                  className="contact__action contact__action--whatsapp"
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Contact Akash on WhatsApp"
+                >
+                  <svg aria-hidden="true" viewBox="0 0 24 24">
+                    <path d="M12.04 2a9.78 9.78 0 0 0-8.38 14.86L2.2 21.8l5.08-1.33A9.83 9.83 0 1 0 12.04 2Zm0 17.96a8.08 8.08 0 0 1-4.12-1.13l-.3-.18-3.01.79.8-2.94-.2-.31A8.08 8.08 0 1 1 12.04 19.96Zm4.43-6.05c-.24-.12-1.44-.71-1.66-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.09 3.62.57.25 1.02.39 1.37.5.58.18 1.1.16 1.51.1.46-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28Z" />
+                  </svg>
+                  <span>
+                    <small>QUICK CHAT</small>
+                    <strong>WhatsApp</strong>
+                  </span>
+                  <span className="contact__action-arrow" aria-hidden="true">↗</span>
+                </a>
+              )}
+
+              {emailUrl && (
+                <a
+                  className="contact__action contact__action--email"
+                  href={emailUrl}
+                  aria-label="Send Akash an email"
+                >
+                  <svg aria-hidden="true" viewBox="0 0 24 24">
+                    <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm-.4 2L12 12.05 4.4 6h15.2ZM4 18V7.8l7.45 5.96a.85.85 0 0 0 1.1 0L20 7.8V18H4Z" />
+                  </svg>
+                  <span>
+                    <small>SEND A MESSAGE</small>
+                    <strong>{siteContact.email}</strong>
+                  </span>
+                  <span className="contact__action-arrow" aria-hidden="true">↗</span>
+                </a>
+              )}
+            </div>
 
             <div className="contact__socials">
               <p className="contact__detail-label">SOCIAL PROFILES</p>
