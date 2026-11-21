@@ -412,6 +412,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.45rem;
   border: 1px solid var(--project-accent-border);
   border-radius: 0.6rem;
   background: var(--project-accent-soft);
